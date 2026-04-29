@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Receipts</title>
+</head>
+<body>
+
+<h2>My Receipts</h2>
+
+{% for r in receipts %}
+<div style="border:1px solid black; margin:10px; padding:10px;">
+    <p>Amount: ₦{{ r[2] }}</p>
+    <p>Level: {{ r[3] }}</p>
+    <p>Date: {{ r[4] }}</p>
+
+    <a href="/download_receipt/{{ r[0] }}">Download Receipt</a>
+</div>
+{% endfor %}
+
+</body>
+</html>

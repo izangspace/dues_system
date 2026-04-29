@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pay Dues</title>
+</head>
+<body>
+
+<h2>Pay Your School Dues</h2>
+
+<div class="payment-box">
+
+    <h3>Amount to Pay: ₦{{ amount }}</h3>
+
+    {% if bank %}
+        <p>Bank Name: {{ bank[1] }}</p>
+        <p>Account Name: {{ bank[2] }}</p>
+        <p>Account Number: {{ bank[3] }}</p>
+    {% else %}
+        <p>No bank details set by admin</p>
+    {% endif %}
+
+</div>
+<p>After payment, upload proof below:</p>
+
+<form action="/upload_proof" method="POST" enctype="multipart/form-data">
+
+    <input type="file" name="proof" required>
+
+    <button type="submit">Upload Proof</button>
+
+</form>
+
+</body>
+</html>

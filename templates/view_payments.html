@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Payments</title>
+</head>
+<body>
+
+<h2>All Payments</h2>
+
+{% for p in payments %}
+
+<div style="border:1px solid black; padding:10px; margin:10px;">
+
+    <p>Student ID: {{ p[1] }}</p>
+    <p>Amount: {{ p[2] }}</p>
+    <p>Level: {{ p[3] }}</p>
+    <p>Status: {{ p[5] }}</p>
+
+    <img src="{{ url_for('static', filename='uploads/' + p[4]) }}" width="150">
+
+    <br>
+
+    {% if p[5] == 'pending' %}
+        <a href="/approve/{{ p[0] }}">Approve</a> |
+        <a href="/reject/{{ p[0] }}">Reject</a>
+    {% endif %}
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

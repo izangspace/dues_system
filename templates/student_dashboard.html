@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h1>Welcome, {{ user[1] }}</h1>
+
+    <div class="profile">
+        <img src="{{ url_for('static', filename='uploads/' + user[6]) }}" width="120">
+        <p><strong>Matric No:</strong> {{ user[2] }}</p>
+        <p><strong>Email:</strong> {{ user[3] }}</p>
+        <p><strong>Level:</strong> {{ user[4] }}</p>
+    </div>
+
+    <div class="actions">
+        <a href="/pay_dues"><button>💳 Pay Dues</button></a>
+        <a href="/upload_proof"><button>📤 Upload Proof</button></a>
+        <a href="/receipts"><button>🧾 View Receipts</button></a>
+        <a href="/update_level"><button>🔄 Update Level</button></a>
+    </div>
+    <a href="/download_receipt/{{ payment_id }}">
+    <button>Download Receipt</button>
+    </a>
+
+</div>
+
+</body>
+</html>

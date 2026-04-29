@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<style>
+    h1{
+        color: white;
+        background-color: green;
+    }
+</style>
+<body>
+
+<div class="dashboard">
+    <h1>Admin Dashboard</h1>
+
+    <div class="actions">
+        <a href="/view_students"><button>👨‍🎓 View Students</button></a>
+        <a href="/view_payments"><button>💳 View Payments</button></a>
+        <a href="/set_bank"><button>🏦 Set Bank Details</button></a>
+        <a href="/logout"><button>🚪 Logout</button></a>
+    </div>
+</div>
+
+</body>
+</html>
