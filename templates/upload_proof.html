@@ -2,18 +2,18 @@
 <html>
 <head>
     <title>Upload Proof</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-<h2>Upload Proof of Payment</h2>
+<div class="form-container">
+    <h2>Upload Proof of Payment</h2>
 
-<form action="/upload_proof" method="POST" enctype="multipart/form-data">
-
-    <input type="file" name="proof" required>
-
-    <button type="submit">Submit Proof</button>
-
-</form>
+    <form action="/upload_proof" method="POST" enctype="multipart/form-data">
+        <input type="file" name="proof" required>
+        <button type="submit">Submit Proof</button>
+    </form>
+</div>
 
 </body>
 </html>

@@ -2,39 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register Student</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student - NACOS Dues</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <div class="logo">NACOS Dues</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/student_login">Student Login</a></li>
+                    <li><a href="/admin_login">Admin Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<div class="form-container">
-    <h2>Student Registration</h2>
+    <div class="form-container">
+        <h2>Student Registration</h2>
 
-    <form action="/register" method="POST" enctype="multipart/form-data">
+        {% if error %}
+            <div class="message error">{{ error }}</div>
+        {% endif %}
 
-        <input type="text" name="name" placeholder="Full Name" required>
+        {% if success %}
+            <div class="message success">{{ success }}</div>
+        {% endif %}
 
-        <input type="text" name="matric_no" placeholder="Matric Number" required>
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="text" name="matric_no" placeholder="Matric Number" required>
+            <input type="email" name="email" placeholder="Email" required>
 
-        <input type="email" name="email" placeholder="Email" required>
+            <select name="level" required>
+                <option value="">Select Level</option>
+                <option value="100">100 Level</option>
+                <option value="200">200 Level</option>
+                <option value="300">300 Level</option>
+                <option value="400">400 Level</option>
+            </select>
 
-        <select name="level" required>
-            <option value="">Select Level</option>
-            <option value="100">100 Level</option>
-            <option value="200">200 Level</option>
-            <option value="300">300 Level</option>
-            <option value="400">400 Level</option>
-        </select>
+            <input type="password" name="password" placeholder="Password" required>
 
-        <input type="password" name="password" placeholder="Password" required>
+            <label for="image">Upload Profile Picture (optional):</label>
+            <input type="file" name="image" id="image" accept="image/*">
 
-        <label>Upload Profile Picture:</label>
-        <input type="file" name="image" required>
-
-        <button type="submit">Register</button>
-
-    </form>
-</div>
-
+            <button type="submit">Register</button>
+        </form>
+    </div>
 </body>
 </html>

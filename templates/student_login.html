@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Student Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - NACOS Dues</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <div class="logo">NACOS Dues</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/student_login">Student Login</a></li>
+                    <li><a href="/admin_login">Admin Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<div class="form-container">
-    <h2>Student Login</h2>
+    <div class="form-container">
+        <h2>Student Login</h2>
 
-    <form action="/student_login" method="POST">
+        {% if error %}
+            <div class="message error">{{ error }}</div>
+        {% endif %}
 
-        <input type="text" name="matric_no" placeholder="Matric Number" required>
+        <form action="/student_login" method="POST">
+            <input type="text" name="matric_no" placeholder="Matric Number" required value="{{ matric_no or '' }}">
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
 
-        <input type="password" name="password" placeholder="Password" required>
-
-        <button type="submit">Login</button>
-
-    </form>
-</div>
-
+        <p class="forgot-link"><a href="{{ url_for('student_reset_password') }}">Forgot password?</a></p>
+    </div>
 </body>
 </html>

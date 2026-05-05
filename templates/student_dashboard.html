@@ -1,33 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - NACOS Dues</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <div class="logo">NACOS Dues</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('student_dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('pay_dues') }}">Pay Dues</a></li>
+                    <li><a href="{{ url_for('upload_proof') }}">Upload Proof</a></li>
+                    <li><a href="{{ url_for('view_receipts') }}">Receipts</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<div class="dashboard">
+    <div class="dashboard">
+        <div class="profile">
+            <img src="{{ url_for('static', filename='uploads/' + user[6]) if user[6] else url_for('static', filename='images/default.jpg') }}" alt="Profile Picture">
+            <div>
+                <h3>Welcome, {{ user[1] }}!</h3>
+                <p><strong>Matric No:</strong> {{ user[2] }}</p>
+                <p><strong>Email:</strong> {{ user[3] }}</p>
+                <p><strong>Current Level:</strong> {{ user[4] }}</p>
+                <p><strong>Department:</strong> Computer Science</p>
+            </div>
+        </div>
 
-    <h1>Welcome, {{ user[1] }}</h1>
-
-    <div class="profile">
-        <img src="{{ url_for('static', filename='uploads/' + user[6]) }}" width="120">
-        <p><strong>Matric No:</strong> {{ user[2] }}</p>
-        <p><strong>Email:</strong> {{ user[3] }}</p>
-        <p><strong>Level:</strong> {{ user[4] }}</p>
+        <div class="actions">
+            <a href="{{ url_for('pay_dues') }}"><button>💳 Pay Dues</button></a>
+            <a href="{{ url_for('upload_proof') }}"><button>📤 Upload Payment Proof</button></a>
+            <a href="{{ url_for('view_receipts') }}"><button>🧾 View Receipts</button></a>
+            <a href="{{ url_for('update_level') }}"><button>🔄 Update Level</button></a>
+        </div>
     </div>
-
-    <div class="actions">
-        <a href="/pay_dues"><button>💳 Pay Dues</button></a>
-        <a href="/upload_proof"><button>📤 Upload Proof</button></a>
-        <a href="/receipts"><button>🧾 View Receipts</button></a>
-        <a href="/update_level"><button>🔄 Update Level</button></a>
-    </div>
-    <a href="/download_receipt/{{ payment_id }}">
-    <button>Download Receipt</button>
-    </a>
-
-</div>
-
 </body>
 </html>

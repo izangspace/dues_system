@@ -2,33 +2,32 @@
 <html>
 <head>
     <title>Pay Dues</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-<h2>Pay Your School Dues</h2>
+<div class="form-container">
+    <h2>Pay Your School Dues</h2>
 
-<div class="payment-box">
+    <div class="payment-box">
+        <h3>Amount to Pay: ₦{{ amount }}</h3>
 
-    <h3>Amount to Pay: ₦{{ amount }}</h3>
+        {% if bank %}
+            <p><strong>Bank Name:</strong> {{ bank[1] }}</p>
+            <p><strong>Account Name:</strong> {{ bank[2] }}</p>
+            <p><strong>Account Number:</strong> {{ bank[3] }}</p>
+        {% else %}
+            <p>No bank details set by admin</p>
+        {% endif %}
+    </div>
 
-    {% if bank %}
-        <p>Bank Name: {{ bank[1] }}</p>
-        <p>Account Name: {{ bank[2] }}</p>
-        <p>Account Number: {{ bank[3] }}</p>
-    {% else %}
-        <p>No bank details set by admin</p>
-    {% endif %}
+    <p>After payment, upload proof below:</p>
 
+    <form action="/upload_proof" method="POST" enctype="multipart/form-data">
+        <input type="file" name="proof" required>
+        <button type="submit">Upload Proof</button>
+    </form>
 </div>
-<p>After payment, upload proof below:</p>
-
-<form action="/upload_proof" method="POST" enctype="multipart/form-data">
-
-    <input type="file" name="proof" required>
-
-    <button type="submit">Upload Proof</button>
-
-</form>
 
 </body>
 </html>

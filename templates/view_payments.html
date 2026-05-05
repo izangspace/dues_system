@@ -2,32 +2,125 @@
 <html>
 <head>
     <title>View Payments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .payment-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .payment-card.approved {
+            border-left: 5px solid #28a745;
+        }
+        .payment-card.pending {
+            border-left: 5px solid #ffc107;
+        }
+        .payment-card.rejected {
+            border-left: 5px solid #dc3545;
+        }
+        .payment-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons button, .action-buttons a {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .approve-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .approve-btn:hover {
+            background-color: #218838;
+        }
+        .reject-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .reject-btn:hover {
+            background-color: #c82333;
+        }
+        .proof-img {
+            max-width: 200px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .status-pending {
+            background-color: #ffc107;
+            color: black;
+        }
+        .status-approved {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-rejected {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
-<h2>All Payments</h2>
+<div class="container">
+    <h2>Payment Management</h2>
 
-{% for p in payments %}
+    {% if payments %}
+        {% for p in payments %}
+        <div class="payment-card {{ p[5] }}">
+            <div class="payment-info">
+                <div>
+                    <p><strong>Student ID:</strong> {{ p[1] }}</p>
+                    <p><strong>Amount:</strong> ₦{{ p[2] }}</p>
+                    <p><strong>Level:</strong> {{ p[3] }}</p>
+                </div>
+                <div>
+                    <p><strong>Date Uploaded:</strong> {{ p[6] if p[6] else 'N/A' }}</p>
+                </div>
+            </div>
 
-<div style="border:1px solid black; padding:10px; margin:10px;">
+            <img src="{{ url_for('static', filename='uploads/' + p[4]) }}" alt="Payment Proof" class="proof-img">
 
-    <p>Student ID: {{ p[1] }}</p>
-    <p>Amount: {{ p[2] }}</p>
-    <p>Level: {{ p[3] }}</p>
-    <p>Status: {{ p[5] }}</p>
+            <br>
+            <div class="status-badge status-{{ p[5] }}">
+                Status: {{ p[5].upper() }}
+            </div>
 
-    <img src="{{ url_for('static', filename='uploads/' + p[4]) }}" width="150">
-
-    <br>
-
-    {% if p[5] == 'pending' %}
-        <a href="/approve/{{ p[0] }}">Approve</a> |
-        <a href="/reject/{{ p[0] }}">Reject</a>
+            <div class="action-buttons" style="margin-top: 15px;">
+                {% if p[5] == 'pending' %}
+                    <a href="/approve/{{ p[0] }}" class="approve-btn">✓ Approve</a>
+                    <a href="/reject/{{ p[0] }}" class="reject-btn">✕ Reject</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No payments yet.</p>
     {% endif %}
-
 </div>
 
-{% endfor %}
+<a href="{{ url_for('admin_dashboard') }}" style="margin-top: 20px; display: inline-block;">
+    <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        ← Back to Dashboard
+    </button>
+</a>
 
 </body>
 </html>

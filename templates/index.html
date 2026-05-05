@@ -2,44 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Dues System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NACOS Dues Payment System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
 </head>
-<style>
-    body{
-        background: url("../images/3.jpg");
-        background-size: 1500px;
-    }
-    h1{
-        color: black;
-    }
-</style>
-<body style="background-image: url('{{ url_for('static', filename='images/3.jpg')}}');">
-
-    <div class="container">
-        <h1>NACOS Dues Payment System</h1>
-        <p class="subtitle">Simple. Secure. Transparent.</p>
-
-        <div class="card-container">
-
-            <a href="/register" class="card">
-                <h2>🎓 Register Student</h2>
-                <p>Create a new student account</p>
-            </a>
-
-            <a href="/student_login" class="card">
-                <h2>🔐 Student Login</h2>
-                <p>Access your dashboard</p>
-            </a>
-
-            <a href="/admin_login" class="card">
-                <h2>🛠 Admin Login</h2>
-                <p>Manage students & payments</p>
-            </a>
-
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">NACOS Dues</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/student_login">Student Login</a></li>
+                    <li><a href="/admin_login">Admin Login</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
+    </header>
 
+    <main class="main-content">
+        <div class="container">
+            <h1>NACOS Dues Payment System</h1>
+            <p class="subtitle">Simple. Secure. Transparent.</p>
+
+            <div class="card-container">
+                <a href="/register" class="card">
+                    <h2>🎓 Register Student</h2>
+                    <p>Create a new student account</p>
+                </a>
+
+                <a href="/student_login" class="card">
+                    <h2>🔐 Student Login</h2>
+                    <p>Access your dashboard</p>
+                </a>
+
+                <a href="/admin_login" class="card">
+                    <h2>🛠 Admin Login</h2>
+                    <p>Manage students & payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

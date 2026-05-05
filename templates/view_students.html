@@ -2,21 +2,51 @@
 <html>
 <head>
     <title>Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .students-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .student-card {
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .student-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .student-info {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
 
-<h2>All Students</h2>
+<div class="students-container">
+    <h2>All Students</h2>
 
-{% for s in students %}
-<div style="border:1px solid black; margin:10px; padding:10px;">
-    <p>Name: {{ s[1] }}</p>
-    <p>Matric No: {{ s[2] }}</p>
-    <p>Email: {{ s[3] }}</p>
-    <p>Level: {{ s[4] }}</p>
-
-    <img src="{{ url_for('static', filename='uploads/' + s[6]) }}" width="100">
+    {% for s in students %}
+    <div class="student-card">
+        <img src="{{ url_for('static', filename='uploads/' + s[6]) if s[6] else url_for('static', filename='images/default.jpg') }}" alt="Profile Picture">
+        <div class="student-info">
+            <p><strong>Name:</strong> {{ s[1] }}</p>
+            <p><strong>Matric No:</strong> {{ s[2] }}</p>
+            <p><strong>Email:</strong> {{ s[3] }}</p>
+            <p><strong>Level:</strong> {{ s[4] }}</p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 
 </body>
 </html>
