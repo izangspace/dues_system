@@ -5,6 +5,8 @@ __pycache__/
 
 # Virtual environment
 izang/
+venv/
+.venv/
 
 # Environment files
 .env
