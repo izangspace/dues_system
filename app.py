@@ -31,6 +31,17 @@ app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'root')
 app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', '')
 app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'student_dues')
 app.config['MYSQL_PORT'] = int(os.environ.get('MYSQL_PORT', 3306))
+
+clear_db_url = os.environ.get('CLEARDB_DATABASE_URL')
+if clear_db_url:
+    import urllib.parse
+    parsed = urllib.parse.urlparse(clear_db_url)
+    app.config['MYSQL_HOST'] = parsed.hostname
+    app.config['MYSQL_USER'] = parsed.username
+    app.config['MYSQL_PASSWORD'] = parsed.password
+    app.config['MYSQL_DB'] = parsed.path.lstrip('/')
+    app.config['MYSQL_PORT'] = parsed.port or 3306
+
 mysql = MySQL(app)
 
 # ---------------- UPLOAD FOLDER ----------------
