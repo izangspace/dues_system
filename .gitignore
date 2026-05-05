@@ -1,0 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+izang/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Receipts and uploads
+receipts/
+static/uploads/
+
+# IDE/editor files
+.vscode/
+.idea/
